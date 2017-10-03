@@ -1,7 +1,7 @@
 from flask import Flask, Response, request
 from rehive import Rehive, APIException
 
-API_TOKEN = "67582d9715354b0970400d5467762d6a13dbf106cf6180b718bcfc63099d9712"
+API_TOKEN = ""
 
 app = Flask(__name__)
 rehive = Rehive(API_TOKEN)
