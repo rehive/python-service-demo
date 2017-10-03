@@ -85,7 +85,7 @@ def webhook_transaction():
 
 # Step 3
 # ------------------------------------------------------------------------------
-# 1. Create project on herokue (rehive-python-sdk-demo)
+# 1. Create project on heroku (rehive-python-sdk-demo)
 # 2. Deploy to Heroku
 # 	a. $ heroku login 
 # 	b. $ heroku git:remote -a rehive-python-sdk-demo
@@ -95,5 +95,8 @@ def webhook_transaction():
 # 	f. $ heroku config:set REHIVE_API_TOKEN={token}
 # 3. Site can be found at:
 #	a. https://rehive-python-sdk-demo.herokuapp.com/
+# 4. Add webhooks
+#	b. https://rehive-python-sdk-demo.herokuapp.com/webhook/transaction/'
+#	c. credit
 
 # ------------------------------------------------------------------------------
