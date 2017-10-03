@@ -17,7 +17,7 @@ def index():
 @app.route('/webhook/transaction/', methods=['POST'])
 def webhook_transaction():
 	content = request.get_json(silent=True)
-
+# ------------------------------------------------------------------------------
 	tx_type = content['data']['tx_type']
 	source_transaction = content['data']['source_transaction']
 	status = content['data']['status']
