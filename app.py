@@ -1,7 +1,9 @@
+import os
+
 from flask import Flask, Response, request
 from rehive import Rehive, APIException
 
-API_TOKEN = ""
+API_TOKEN = os.environ.get('API_TOKEN', '')
 
 app = Flask(__name__)
 rehive = Rehive(API_TOKEN)
@@ -9,7 +11,8 @@ rehive = Rehive(API_TOKEN)
 
 @app.route('/')
 def index():
-	return "Rehive Demo"
+
+	return "Rehive Demo {}".format(API_TOKEN[:12])
 
 
 @app.route('/webhook/transaction/', methods=['POST'])
