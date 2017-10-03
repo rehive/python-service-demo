@@ -11,8 +11,7 @@ rehive = Rehive(API_TOKEN)
 
 @app.route('/')
 def index():
-
-	return "Rehive Demo {}".format(API_TOKEN[:12])
+	return "Rehive Demo"
 
 
 @app.route('/webhook/transaction/', methods=['POST'])
