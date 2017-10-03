@@ -3,7 +3,7 @@ import os
 from flask import Flask, Response, request
 from rehive import Rehive, APIException
 
-API_TOKEN = os.environ.get('API_TOKEN', '')
+API_TOKEN = os.environ.get('REHIVE_API_TOKEN', '')
 
 app = Flask(__name__)
 rehive = Rehive(API_TOKEN)
