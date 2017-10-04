@@ -98,7 +98,7 @@ if __name__ == "__main__":
 # 	f. $ heroku config:set REHIVE_API_TOKEN={token}
 # 3. Site can be found at:
 #	a. https://rehive-python-sdk-demo.herokuapp.com/
-# 4. Add webhooks
+# 4. Add transaction webhook:
 #	b. https://rehive-python-sdk-demo.herokuapp.com/webhook/transaction/'
 #	c. credit
 
