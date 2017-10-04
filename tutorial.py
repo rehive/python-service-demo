@@ -83,6 +83,9 @@ def webhook_transaction():
 		mimetype='application/json')
 
 
+if __name__ == "__main__":
+	app.run() 
+
 # Step 3
 # ------------------------------------------------------------------------------
 # 1. Create project on heroku (rehive-python-sdk-demo)
