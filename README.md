@@ -1,4 +1,4 @@
-# Python SDK Demo
+# Python Service Demo
 
 Basic SDK usage in the context of a mico service.
 
