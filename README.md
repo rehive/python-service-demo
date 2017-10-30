@@ -6,6 +6,6 @@ This service will automatically transfer 10% of each credit transaction a user g
 
 **NB: This service is not intended for production usage as it has multiple security flaws. The service should simple be used as an example of how webhooks and the Rehive python SDK can be used.**
 
-## TODO
+### TODO
 
 1. Update the demo to have better valudation, security and structure.
