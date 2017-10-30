@@ -8,4 +8,4 @@ This service will automatically transfer 10% of each credit transaction a user g
 
 ### TODO
 
-1. Update the demo to have better valudation, security and structure.
+Update the demo to have better valudation, security and structure.
