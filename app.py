@@ -14,9 +14,9 @@ WEBHOOK_SECRET = os.environ.get('WEBHOOK_SECRET', '')
 
 
 def get_auth_token(request, name='secret'):
-	"""
-	Get the auth token from the AUTHORIZATION header.
-	"""
+    """
+    Get the auth token from the AUTHORIZATION header.
+    """
 
     try:
         auth = request.headers['HTTP_AUTHORIZATION'].split()
@@ -33,9 +33,9 @@ def get_auth_token(request, name='secret'):
 
 
 def authenticate(request):
-	"""
-	Return JSON indicating authorization is required.
-	"""
+    """
+    Return JSON indicating authorization is required.
+    """
 
     data = {'status':'error', 
             'message': 'Invalid webhook secret.'}
@@ -44,10 +44,10 @@ def authenticate(request):
 
 
 def requires_auth(f):
-	"""
-	Wrapper for authentication. Checks that the correct webhook secret is 
-	present in the authorization header.
-	"""
+    """
+    Wrapper for authentication. Checks that the correct webhook secret is 
+    present in the authorization header.
+    """
 
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -62,63 +62,63 @@ def requires_auth(f):
 
 @app.route('/')
 def index():
-	"""
-	Home page for the service.
-	"""
+    """
+    Home page for the service.
+    """
 
-	return "Rehive Python Service Demo"
+    return "Rehive Python Service Demo"
 
 
 @app.route('/webhook/transaction/', methods=['POST'])
 @requires_auth
 def webhook_transaction():
-	"""
-	Webhook endpoint. This authenticates the webhook against the stored webhook 
-	secret. If the received transaction passes the validation then a savings
-	account is found/created for the user and a portion of the transaction 
-	amount is transfered to the savings account.
-	"""
+    """
+    Webhook endpoint. This authenticates the webhook against the stored webhook 
+    secret. If the received transaction passes the validation then a savings
+    account is found/created for the user and a portion of the transaction 
+    amount is transfered to the savings account.
+    """
 
-	content = request.get_json(silent=True)
+    content = request.get_json(silent=True)
 
-	source_transaction = content['data']['source_transaction']
-	status = content['data']['status']
-	amount = content['data']['amount']
-	account_reference = content['data']['account']
-	currency_code = content['data']['currency']['code']
-	user_identifier = content['data']['user']['identifier']	
+    source_transaction = content['data']['source_transaction']
+    status = content['data']['status']
+    amount = content['data']['amount']
+    account_reference = content['data']['account']
+    currency_code = content['data']['currency']['code']
+    user_identifier = content['data']['user']['identifier'] 
 
-	if (status == "Complete" and source_transaction is None
-			and amount > 10):
-		rehive = Rehive(API_TOKEN)
+    if (status == "Complete" and source_transaction is None
+            and amount > 10):
+        rehive = Rehive(API_TOKEN)
 
-		accounts = rehive.admin.accounts.get(
-			filters={"name": "savings", 
-					 "user": user_identifier}
-		)
+        accounts = rehive.admin.accounts.get(
+            filters={"name": "savings", 
+                     "user": user_identifier}
+        )
 
-		try:
-			savings_account = accounts[0]
-		except KeyError:
-			savings_account = rehive.admin.accounts.create(
-			    name="savings",
-			    primary=False,
-			    user=user_identifier
-			)
+        try:
+            savings_account = accounts[0]
+        except KeyError:
+            savings_account = rehive.admin.accounts.create(
+                name="savings",
+                primary=False,
+                user=user_identifier
+            )
 
-		transaction = rehive.admin.transactions.create_transfer(
-			user=user_identifier,
-			recipient=user_identifier,
-			debit_account=account_reference,
-			credit_account=savings_account['reference'],
-			currency=currency_code,
-			amount=int((10 * amount) / 100)
-		)
+        transaction = rehive.admin.transactions.create_transfer(
+            user=user_identifier,
+            recipient=user_identifier,
+            debit_account=account_reference,
+            credit_account=savings_account['reference'],
+            currency=currency_code,
+            amount=int((10 * amount) / 100)
+        )
 
-	return Response(json.dumps({'status':'success'}), status=200, 
-		mimetype='application/json')
+    return Response(json.dumps({'status':'success'}), status=200, 
+        mimetype='application/json')
 
 
 # Run the falsk application
 if __name__ == "__main__":
-	app.run() 
+    app.run() 
