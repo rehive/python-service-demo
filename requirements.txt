@@ -7,7 +7,7 @@ idna==2.6
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
-rehive==0.4.0
+rehive==1.1.4
 requests==2.18.4
 urllib3==1.22
 Werkzeug==0.12.2
